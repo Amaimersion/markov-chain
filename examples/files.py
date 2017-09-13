@@ -30,5 +30,6 @@ def main():
     markov_chain_sqlite = file.SQLiteFile(path=".common/simple_example.sqlite")
     # markov_chain_sqlite.generate()
 
+
 if __name__ == "__main__":
     main()
