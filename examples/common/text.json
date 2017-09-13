@@ -1,0 +1,87 @@
+{
+    "text": {
+        "simple": ["One fish two fish red fish blue fish."],
+        "hard": ["Today you are you. That is truer than true. There is no one alive who is you-er than you."],
+        "insane": ["You have brains in your head. You have feet in your shoes. You can steer yourself any direction you choose. You're on your own.", "The more that you read, the more things you will know. The more that you learn, the more places youll go."],
+        "extra": ["Today you are you. That is truer than true. There is no one alive who is you-er than you.", "You have brains in your head. You have feet in your shoes. You can steet yourself any direction you choose. You’re on your own.", "The more that you read, the more things you will know. The more that you learn, the more places you’ll go.", "Think left and think right and think low and think high. Oh, the thinks you can think up if only you try."],
+        "ru": ["Но тебе придется смириться с этим, - возразил Воланд, и усмешка искривила его рот, - не успел ты появиться на крыше, как уже сразу отвесил нелепость, и я тебе скажу, в чем она, - в твоих интонациях. Ты произнес свои слова так, как будто ты не признаешь теней, а также и зла. Не будешь ли ты так добр подумать над вопросом: что бы делало твое добро, если бы не существовало зла, и как бы выглядела земля, если бы с нее исчезли тени? Ведь тени получаются от предметов и людей. Вот тень от моей шпаги. Но бывают тени от деревьев и живых существ. Не хочешь ли ты ободрать весь земной шар, снеся с него прочь все деревья и все живое из-за твоей фантазии наслаждаться голым светом? Ты глуп."],
+        "numerated": ["1. One 2. Two 3. Three 4. Four 5. Five 6. Six 7. Seven 8. Eight 9. Nine 10. Ten"]
+    },
+
+    "correct_parameters": [
+        {
+            "text": "simple", 
+            "parameters": {
+                "name": "Simple text"
+            }
+        },
+
+        {
+            "text": "hard", 
+            "parameters": {
+                "name": "Hard text"
+            }
+        },
+
+        {
+            "text": "insane", 
+            "parameters": {
+                "name": "Insane text",
+                "init": {"window": 2},
+                "generation": {"max_words": 15, "max_length": 100}
+            }
+        },
+
+        {
+            "text": "extra",
+            "parameters": {
+                "name": "Extra text",
+                "init": {"window": 2},
+                "generation": {"start": "You have"}
+            }
+        },
+
+        {
+            "text": "ru",
+            "parameters": {
+                "name": "RU text",
+                "generation": {"max_words": 30}
+            }
+        },
+
+        {
+            "text": "numerated", 
+            "parameters": {
+                "name": "Numerated text"
+            }
+        }
+    ],
+
+    "incorrect_parameters": [
+        {
+            "text": "hard", 
+            "parameters": {
+                "name": "Hard text",
+                "generation": {"start": "You"}
+            }
+        },
+
+        {
+            "text": "insane",
+            "parameters": {
+                "name": "Insane text",
+                "init": {"window": 2},
+                "generation": {"max_words": 20, "max_length": 0}
+            }
+        },
+
+        {
+            "text": "extra",
+            "parameters": {
+                "name": "Extra text",
+                "init": {"window": 2},
+                "generation": {"start": "You"}
+            }
+        }
+    ]   
+}
