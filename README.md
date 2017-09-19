@@ -67,41 +67,41 @@ You can trace this sequence yourself:
     
         Defaults to ``None``.
       
-        The name of the instance.
+        A name of an instance.
 
       - ``**start (str)``:
     
         Defaults to ``"*START*"``.
       
-        The start word of a sentence.
+        A start word of a sentence.
 
       - ``**end (str)``:
      
         Defaults to ``"*END*"``.
        
-        The end word of a sentence.
+        An end word of a sentence.
 
       - ``**text_end (str)``:
       
         Defaults to ``"*TEXT_END*"``.
         
-        The end word of the text.
+        An end word of a text.
 
       - ``**window (int)``:
       
         Defaults to ``1``.
         
-        Count of window for the chain.
+        Count of window for a chain.
 
-      - ``**data (list)``:
+      - ``**data (any iterable type)``:
       
-        Defaults to ``[]``.
+        Defaults to ``()``.
         
-        The data for creating the Markov Chain.
+        A data for creating the Markov Chain.
 
         Warning: be careful with change of this parameter.
 
-        It should be a (list) which contain the values (list). The values contain text (str) separated by comma.
+        It should be an (any iterable type) which contain a values (list or tuple). The values contain a text (str) separated by a comma.
 
       - ``**chain (dict)``:
       
@@ -111,15 +111,15 @@ You can trace this sequence yourself:
 
         Warning: be careful with change of this parameter.
 
-        It should be a (dict) with the keys (str) which contain the values (list). The value contain the text (str) separated by comma.
+        It should be a (dict) with a keys (str) which contain a values (list or tuple). The values contain a text (str) separated by a comma.
   
   - #### init():
   
     ##### Args:
   
-      - ``data (list)``:
+      - ``data (any iterable type)``:
     
-        The text for creating the Markov Chain.
+        A data for creating the Markov Chain.
       
   - #### create()
       
@@ -131,9 +131,9 @@ You can trace this sequence yourself:
     
         Defaults to ``self.start``.
       
-        Start of the sentence.
+        Start of a sentence.
 
-        Warning: The chain is case-sensitive and punctuation-sensitive.
+        Warning: the chain is case-sensitive and punctuation-sensitive.
 
       - ``**max_words (int)``:
     
@@ -159,27 +159,27 @@ You can trace this sequence yourself:
      
         Defaults to ``".!?"``.
        
-        The chars which should stand at the end of a sentence. 
+        A chars which should stand at the end of a sentence.
 
       - ``**not_end_chars (str)``:
      
         Defaults to ``','``.
        
-        The chars which should not stand at the end of a sentence. They will be replaced by **end_char.
+        A chars which should not stand at the end of a sentence. They will be replaced by **end_char.
 
       - ``**end_char (str)``:
       
         Defaults to ``'.'``.
         
-        If the last char of a sentence is not in **end_chars, then the **end_char will be appended to the end of a sentence.
+        If a last char of a sentence is not in **end_chars, then the **end_char will be appended to the end of a sentence.
         
     ##### Returns:
      
       type - ``str``.
       
-      If **start will found, then a text will be generated. 
-      
-      Else the text will be equal to **start.
+      If **start will found, then a text will be generated.
+
+      Else a text will be equal to **start.
   
 
 ## Extensions
@@ -275,7 +275,7 @@ An extensions expand a basic capabilities of the Markov Chain.
           a path to the file.
      
 
-## Examples of right usage
+## Examples of correct usage
 
 #### Basic usage
 
@@ -294,7 +294,7 @@ print(chain.generate())
 from markov_chain import MarkovChain
 
 chain = MarkovChain("Hard test MarkovChain instance", window=2)
-chain.init(["Today you are you. That is truer than true. There is no one alive who is you-er than you."])
+chain.init(("Today you are you. That is truer than true. There is no one alive who is you-er than you.",))
 chain.create()
 print(chain.generate())
 ```
@@ -304,8 +304,10 @@ print(chain.generate())
 ```python
 from markov_chain import MarkovChain
 
+text = (i for i in ("You have brains in your head. You have feet in your shoes. You can steer yourself any direction you choose. You're on your own.", "The more that you read, the more things you will know. The more that you learn, the more places youll go."))
+
 chain = MarkovChain("Insane test MarkovChain instance")
-chain.init(["You have brains in your head. You have feet in your shoes. You can steer yourself any direction you choose. You're on your own.", "The more that you read, the more things you will know. The more that you learn, the more places youll go."])
+chain.init(text)
 chain.create()
 print(chain.generate(start="You", max_words=10))
 ```
@@ -345,7 +347,7 @@ print(chain.generate())
 ```
 
 
-## Examples of wrong usage
+## Examples of incorrect usage
 
 #### Case-sensitive
 

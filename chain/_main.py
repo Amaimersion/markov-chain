@@ -10,13 +10,13 @@ class MarkovChain(Interaction, Initialization, Creation, Generation):
     Note: the Markov chain will be
     case-sensitive and punctuation-sensitive.
 
-    Warning: MarkovChain requires next modules
+    Warning: MarkovChain requires the next modules
     for correct work: Interaction, Initialization,
     Creation, Generation.
 
     Examples:
         chain = MarkovChain()
-        chain.init(["One fish two fish red fish blue fish."])
+        chain.init(("One fish two fish red fish blue fish.",))
         chain.create()
         text = chain.generate()
     """

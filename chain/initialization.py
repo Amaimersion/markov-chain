@@ -3,66 +3,95 @@ class Initialization(object):
 
     Functions:
         init:
-            assign the data.
-
-        init_append:
-            append the data.
+            assign a data.
 
         _initialization:
-            create the data.
-    """
-    
-    def init(self, data):
-        """Assign the data to the self._data."""
-        if self._data:
-            self._data = []
-        self._initialization(data)
+            creation a data.
 
-    def init_append(self, data):
-        """Append the data to the self._data."""
-        self._initialization(data)
+        _create_elements:
+            creation an elements.
+    """
+
+    def init(self, data):
+        """Assign a data to the self._data.
+
+        Note: this overwrites the self._data.
+
+        Args:
+            data (any iterable type).
+        """
+        if self._data:
+            self._data = ()
+
+        self._data = self._initialization(data)
 
     def _initialization(self, data):
         """Initialization of the data.
-        
+
         The data is converted to the data for creating the Markov chain.
 
-        Note: the data splitting into the sentences by ". " chars.
+        Warning: a data should not be a pure str type.
+        At least it should be (str,) or [str].
 
-        In this way, "3. Some text" will be converted to the
-        "*START* 3. *END* *START* Some text *END* *TEXT_END*".
+        If it will be pure str type, then each char from the
+        data will be interpreted as an individual text.
+
+        Note: the self._data will be a generator.
+
+        So, if it used once, then it should be initializated again.
 
         Args:
-            data (list):
-                The text for creating the Markov Chain.
+            data (any iterable type):
+                a data for creating the Markov Chain.
 
         Raises:
             TypeError:
-                The data not instance of a list.
+                a data not iterable type.
+
+        Returns:
+            type - generator.
+            The created data.
+        """
+        if not hasattr(data, "__iter__"):
+            raise TypeError("data should be an iterable type")
+
+        return (self._create_elements(text) for text in data)
+
+    def _create_elements(self, text):
+        """Creation an elements.
+
+        Creates a elements for the data.
+
+        Note: the text splitting into sentences by ". " chars.
+
+        In this way, "4. Some text" will be converted to the
+        "*START* 4. *END* *START* Some text *END* *TEXT_END*".
+
+        Args:
+            text (str):
+                a text for creating the data.
+
+        Returns:
+            type - tuple.
+            The created elements.
 
         Examples:
-            Input: [
-                "One fish two fish red fish blue fish."
-            ]
-            self._data: [
-                ['*START*', 'One', 'fish', 'two', 'fish', 
-                'red', 'fish', 'blue', 'fish.', '*END*', '*TEXT_END*']
-            ]
+            Input: "One fish two fish red fish blue fish."
+            Output: (
+                '*START*', 'One', 'fish', 'two', 'fish',
+                'red', 'fish', 'blue', 'fish.', '*END*', '*TEXT_END*'
+            )
         """
-        if not isinstance(data, list):
-            raise TypeError("data should have a list type")
+        elements = (
+            ". {end} {start} "
+        ).format(
+            end=self.end,
+            start=self.start
+        ).join(
+            text.split(". ")
+        ).split()
 
-        for text in data:
-            elements = (
-                ". {end} {start} "
-            ).format(
-                end=self.end,
-                start=self.start
-            ).join(
-                text.split(". ")
-            ).split()
+        elements.insert(0, self.start)
+        elements.extend([self.end, self.text_end])
 
-            elements.insert(0, self.start)
-            elements.extend([self.end, self.text_end])
-
-            self._data.append(elements)
+        return elements

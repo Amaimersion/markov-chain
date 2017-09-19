@@ -93,15 +93,15 @@ print(chain.generate())
         
         Число окон для цепи.
 
-      - ``**data (list)``:
+      - ``**data (любой итерируемый тип)``:
       
-        По умолчанию ``[]``.
+        По умолчанию ``()``.
         
         Данные для создания цепи.
 
         Предупреждение: будьте осторожны с изменением этого параметра.
 
-        Это должен быть (list), который содержит значения (list). Значения содержат текст (str), который разделен запятой.
+        Это должен быть (любой итерируемый тип), который содержит значения (list or tuple). Значения содержат текст (str), который разделен запятой.
 
       - ``**chain (dict)``:
       
@@ -111,15 +111,15 @@ print(chain.generate())
 
         Предупреждение: будьте осторожны с изменением этого параметра.
 
-        Это должен быть (dict) с ключами (str), который содержит значения (list). Значение содержит текст (str), который разделен запятой.
+        Это должен быть (dict) с ключами (str), который содержит значения (list or tuple). Значения содержат текст (str), который разделен запятой.
   
   - #### init():
   
     ##### Аргументы:
   
-      - ``data (list)``:
+      - ``data (любой итерируемый тип)``:
     
-        Текст для создания цепи Маркова.
+        Данные для создания цепи Маркова.
       
   - #### create()
       
@@ -275,7 +275,7 @@ print(chain.generate())
           путь к файлу.
      
 
-## Примеры правильного использования
+## Примеры корректного использования
 
 #### Обычное использование
 
@@ -293,10 +293,12 @@ print(chain.generate())
 ```python
 from markov_chain import MarkovChain
 
-chain = MarkovChain("Hard test MarkovChain instance", window=2)
-chain.init(["Today you are you. That is truer than true. There is no one alive who is you-er than you."])
+text = (i for i in ("You have brains in your head. You have feet in your shoes. You can steer yourself any direction you choose. You're on your own.", "The more that you read, the more things you will know. The more that you learn, the more places youll go."))
+
+chain = MarkovChain("Insane test MarkovChain instance")
+chain.init(text)
 chain.create()
-print(chain.generate())
+print(chain.generate(start="You", max_words=10))
 ```
 
 #### Аргументы генерации
@@ -345,7 +347,7 @@ print(chain.generate())
 ```
 
 
-## Примеры неправильного использования
+## Примеры некорректного использования
 
 #### Чувствительность к регистру
 

@@ -5,7 +5,14 @@ import sqlite3
 try:
     from ...chain.interaction import Interaction
     from ...chain.generation import Generation
+
+# attempted relative import beyond top-level package.
 except ValueError:
+    from chain.interaction import Interaction
+    from chain.generation import Generation
+
+# parent module '' not loaded, cannot perform relative import.
+except SystemError:
     from chain.interaction import Interaction
     from chain.generation import Generation
 
@@ -20,8 +27,8 @@ class SQLiteFile(Interaction, Generation):
     and creation. Use MarkovChain instead.
 
     Functions:
-        _check_error:
-            check errors.
+        _check_errors:
+            check for errors.
 
         _create_cursor:
             create connect and create cursor.
@@ -35,7 +42,7 @@ class SQLiteFile(Interaction, Generation):
         self.name = name
         self.path = kwargs.get("path")
 
-    def _check_error(self):
+    def _check_errors(self):
         """Check errors.
         
         Raises:

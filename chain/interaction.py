@@ -1,46 +1,46 @@
 class Interaction(object):
     """The interaction module for inheritance.
 
-    User interaction with the Markov chain.
+    User interaction with a Markov chain.
 
     Functions:
-        getter and setter for self._data.
+        getter and setter for the self._data.
 
-        getter and setter for self._chain.
+        getter and setter for the self._chain.
     """
 
     def __init__(self, name=None, **kwargs):
-        """Creating a new instance of the MarkovChain.
+        """Creates a new instance of the MarkovChain.
 
         Args:
             name (str):
                 Defaults to None.
-                The name of the instance.
+                A name of an instance.
 
             **start (str):
                 Defaults to "*START*".
-                The start word of a sentence.
+                A start word of a sentence.
 
             **end (str):
                 Defaults to "*END*".
-                The end word of a sentence.
+                An end word of a sentence.
 
             **text_end (str):
                 Defaults to "*TEXT_END*".
-                The end word of the text.
+                An end word of a text.
 
             **window (int):
                 Defaults to 1.
-                Count of window for the chain.
+                Count of window for a chain.
 
-            **data (list):
-                Defaults to [].
-                The data for creating the Markov Chain.
+            **data (any iterable type):
+                Defaults to ().
+                A data for creating the Markov Chain.
 
                 Warning: be careful with change of this parameter.
 
-                It should be a (list) which contain the values (list).
-                The values contain text (str) separated by comma.
+                It should be an (any iterable type) which contain a values (list or tuple).
+                The values contain a text (str) separated by a comma.
 
             **chain (dict):
                 Defaults to {}.
@@ -48,9 +48,8 @@ class Interaction(object):
 
                 Warning: be careful with change of this parameter.
 
-                It should be a (dict) with the keys (str) which contain 
-                the values (list). 
-                The value contain the text (str) separated by comma.
+                It should be a (dict) with a keys (str) which contain a values (list or tuple).
+                The values contain a text (str) separated by a comma.
         """
         super(Interaction, self).__init__()
         self.name = name
@@ -58,7 +57,7 @@ class Interaction(object):
         self.end = kwargs.get("end", "*END*")
         self.text_end = kwargs.get("text_end", "*TEXT_END*")
         self.window = kwargs.get("window", 1)
-        self._data = kwargs.get("data", [])
+        self._data = kwargs.get("data", ())
         self._chain = kwargs.get("chain", {})
 
     @property
