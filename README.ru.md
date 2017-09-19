@@ -293,12 +293,10 @@ print(chain.generate())
 ```python
 from markov_chain import MarkovChain
 
-text = (i for i in ("You have brains in your head. You have feet in your shoes. You can steer yourself any direction you choose. You're on your own.", "The more that you read, the more things you will know. The more that you learn, the more places youll go."))
-
-chain = MarkovChain("Insane test MarkovChain instance")
-chain.init(text)
+chain = MarkovChain("Hard test MarkovChain instance", window=2)
+chain.init(("Today you are you. That is truer than true. There is no one alive who is you-er than you.",))
 chain.create()
-print(chain.generate(start="You", max_words=10))
+print(chain.generate())
 ```
 
 #### Аргументы генерации
@@ -306,8 +304,10 @@ print(chain.generate(start="You", max_words=10))
 ```python
 from markov_chain import MarkovChain
 
+text = (i for i in ("You have brains in your head. You have feet in your shoes. You can steer yourself any direction you choose. You're on your own.", "The more that you read, the more things you will know. The more that you learn, the more places youll go."))
+
 chain = MarkovChain("Insane test MarkovChain instance")
-chain.init(["You have brains in your head. You have feet in your shoes. You can steer yourself any direction you choose. You're on your own.", "The more that you read, the more things you will know. The more that you learn, the more places youll go."])
+chain.init(text)
 chain.create()
 print(chain.generate(start="You", max_words=10))
 ```
